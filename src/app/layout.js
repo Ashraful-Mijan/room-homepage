@@ -7,8 +7,8 @@ const leagueSpartan = League_Spartan({
 });
 
 export const metadata = {
-  title: "Room-Homepage-Master",
-  description: "room home page master",
+  title: "Room Homepage",
+  description: "room home page xyz furnitures",
 };
 
 export default function RootLayout({ children }) {

@@ -8,14 +8,18 @@ const Navbar = () => {
   const isMobileDevice = useMediaQuery();
   return (
     <nav
-      className={`flex items-center ${
+      className={`flex items-center transition-all ease-in duration-1000 ${
         isMobileDevice && !isMobileMenuOpen
           ? ""
           : !isMobileDevice
           ? "gap-16"
           : "gap-5"
-      } absolute w-full 1xl:w-max z-10 ${isMobileDevice ? 'px-5 py-4':'pl-16 pt-12'} ${
-        isMobileMenuOpen ? "bg-white text-black animate-fade" : "1xl:bg-[transparent] text-white"
+      } absolute w-full 1xl:w-max z-10 ${
+        isMobileDevice ? "px-5 py-4" : "pl-16 pt-12 md:px-5 md:pt-5 xl:pl-12 xl:pt-10"
+      } ${
+        isMobileMenuOpen
+          ? "backdrop-blur-sm bg-white/50 text-black"
+          : "bg-[transparent] text-white"
       }`}
     >
       {/* thumbler icon */}
@@ -69,9 +73,9 @@ const Navbar = () => {
       )}
 
       <ul
-        className={`${
-          isMobileDevice && !isMobileMenuOpen && "hidden"
-        } flex gap-7 items-center`}
+        className={`transition-[display,opacity] duration-1000 delay-300 ease-in ${
+          isMobileDevice && !isMobileMenuOpen ? "hidden opacity-0" : "flex opacity-100"
+        } gap-7 items-center`}
       >
         <li>
           <Link href="/">home</Link>

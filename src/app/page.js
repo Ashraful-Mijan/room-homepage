@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import DesktopHero1 from "../../public/images/desktop-image-hero-1.jpg";
 import DesktopHero2 from "../../public/images/desktop-image-hero-2.jpg";
@@ -11,7 +10,7 @@ import aboutImageLight from "../../public/images/image-about-light.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 
@@ -38,49 +37,12 @@ const data = [
 ];
 
 export default function Home() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const swiperRef = useRef();
 
   return (
     <main className="">
       <section className="relative">
-        {/* <nav className="flex items-center gap-16 absolute left-[4.2%] 1xl:top-[7%] z-10 bg-[transfarent] text-white">
-          <svg
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="1xl:hidden"
-            width="20"
-            height="14"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20 12v2H0v-2h20zm0-6v2H0V6h20zm0-6v2H0V0h20z"
-              fill="#FFF"
-              fillRule="evenodd"
-            />
-          </svg>
-          {isMobileMenuOpen ? (
-            <Link className="text-3xl leading-none" href="/">
-              room
-            </Link>
-          ) : null}
-          <ul className="collapse 1xl:visible 1xl:flex gap-7 items-center">
-            <li>
-              <Link href="/">home</Link>
-            </li>
-            <li>
-              <Link href="/">shop</Link>
-            </li>
-            <li>
-              <Link href="/">about</Link>
-            </li>
-            <li>
-              <Link href="/">contact</Link>
-            </li>
-          </ul>
-        </nav> */}
-
         <Navbar />
-
         <Swiper
           ref={swiperRef}
           spaceBetween={5}
@@ -93,7 +55,7 @@ export default function Home() {
         >
           {data.map((slide, index) => (
             <SwiperSlide key={slide.title + index}>
-              <div className="grid grid-cols-1 1xl:grid-cols-[60%,40%]">
+              <div className="grid grid-cols-1 1xl:grid-cols-[60%,40%] md:grid-cols-[2fr,1.5fr]">
                 <div className="relative">
                   <Image
                     src={slide.image}
@@ -102,7 +64,7 @@ export default function Home() {
                     priority
                   />
                   {/* navigation */}
-                  <div className="1xl:hidden absolute z-10 right-0 bottom-0 bg-black text-white w-28 h-14 flex justify-center items-center gap-9">
+                  <div className="xl:hidden absolute z-10 right-0 bottom-0 bg-black text-white w-28 h-14 flex justify-center items-center gap-9">
                     <svg
                       onClick={() => swiperRef.current.swiper.slidePrev()}
                       className="cursor-pointer"
@@ -133,18 +95,19 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
+
                 <div className="bg-white flex justify-center items-center relative">
-                  <div className="px-5 1xl:px-16 py-7 1xl:py-16">
-                    <h1 className="mb-3 text-black font-bold text-4xl 1xl:text-5xl">
+                  <div className="px-5 py-7 xl:px-10 xl:py-0 1xl:px-16 1xl:py-16">
+                    <h1 className="mb-3 text-black font-bold leading-none text-4xl md:text-xl lg:text-4xl xl:text-5xl">
                       {slide.title}
                     </h1>
 
-                    <p className="text-grey text-sm 1xl:text-base">
+                    <p className="text-grey text-sm md:text-[12px] lg:text-sm xl:text-lg leading-normal 1xl:text-base">
                       {slide.description}
                     </p>
 
                     <div className="flex items-center mt-3 gap-4">
-                      <p className="uppercase font-semibold tracking-[1em] text-black">
+                      <p className="uppercase font-semibold tracking-[1em] md:tracking-[.6em] lg:text-lg text-black">
                         shop now
                       </p>
                       <svg
@@ -161,7 +124,7 @@ export default function Home() {
                     </div>
                   </div>
                   {/* navigation */}
-                  <div className="invisible 1xl:visible absolute z-10 left-0 bottom-0 bg-black text-white w-28 h-14 flex justify-center items-center gap-9">
+                  <div className="invisible xl:visible absolute z-10 left-0 bottom-0 bg-black text-white w-28 h-14 flex justify-center items-center gap-9">
                     <svg
                       onClick={() => swiperRef.current.swiper.slidePrev()}
                       className="cursor-pointer"
@@ -197,15 +160,21 @@ export default function Home() {
           ))}
         </Swiper>
 
-        <div className="grid grid-cols-1 1xl:grid-cols-[minmax(max-content,1fr)_auto_minmax(max-content,1fr)]">
-          <div>
-            <Image src={aboutImageDark} alt="dark" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-[minmax(max-content,1fr)_4fr_minmax(max-content,1fr)] 1xl:grid-cols-[minmax(max-content,1fr)_1.5fr_minmax(max-content,1fr)]">
+          <div className="sm:order-1 md:order-2 xl:order-1">
+            <Image
+              className="w-full h-auto sm:h-full"
+              src={aboutImageDark}
+              alt="dark"
+            />
           </div>
-          <div className="flex flex-col justify-center px-5 sm:px-8 py-8">
-            <h4 className="uppercase font-bold text-black tracking-[.2em] sm:tracking-[.5em] mb-2 1xl:mb-3">
+
+          <div className="flex flex-col justify-center px-5 sm:px-8 md:px-5 1xl:px-10 1xl:py-10 py-8 sm:order-3 sm:col-span-full xl:col-auto xl:order-2 1xl:col-auto 1xl:order-2 md:order-1">
+            <h4 className="uppercase font-bold text-black tracking-[.2em] sm:tracking-[.5em] mb-2 1xl:mb-3 lg:text-center xl:text-left lg:text-xl xl:text-2xl">
               about our furniture
             </h4>
-            <p className="text-grey text-sm">
+
+            <p className="text-grey text-sm lg:text-lg 1xl:text-base lg:text-justify xl:text-left">
               Our multifunctional collection blends design and function to suit
               your individual taste. Make each room unique, or pick a cohesive
               theme that best express your interests and what inspires you. Find
@@ -214,8 +183,13 @@ export default function Home() {
               to help you create your dream space.
             </p>
           </div>
-          <div>
-            <Image src={aboutImageLight} alt="dark" />
+
+          <div className="sm:order-2 1xl:order-3 md:order-3 xl:order-3">
+            <Image
+              className="w-full h-auto sm:h-full"
+              src={aboutImageLight}
+              alt="dark"
+            />
           </div>
         </div>
       </section>
